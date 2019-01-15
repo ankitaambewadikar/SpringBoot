@@ -2,6 +2,7 @@ package com.cg.rest.restservicedemo.pojo;
 
 import javax.persistence.Embedded;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
