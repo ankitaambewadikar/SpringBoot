@@ -1,0 +1,5 @@
+package com.cg.rest.restservicedemo.repository;
+
+public interface EmployeeRepository {
+
+}

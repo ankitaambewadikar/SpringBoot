@@ -1,0 +1,9 @@
+package com.cg.rest.restservicedemo.pojo;
+
+public class Employee {
+
+	private int empId;
+	private String empName;
+	private double salary;
+	private Address address;
+}
