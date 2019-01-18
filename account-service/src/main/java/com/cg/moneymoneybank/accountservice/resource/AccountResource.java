@@ -37,38 +37,37 @@ public class AccountResource {
 		return new ResponseEntity<>(accounts, HttpStatus.OK);
 
 	}
+	/*
+	 * @GetMapping("/{accountNumber}") public Account getAccountById(@PathVariable
+	 * int accountNumber) { return service.getAccountById(accountNumber); }
+	 */
 
 	@GetMapping("/{accountNumber}")
-	public Account getAccountById(@PathVariable int accountNumber) {
-		return service.getAccountById(accountNumber);
-	}
+	public ResponseEntity<Account> getAccountById(@PathVariable int accountNumber) {
+		Optional<Account> optionalAccount = service.getAccountById(accountNumber);
+		Account account = (Account) optionalAccount.get();
+		// Account account = service.getAccountById(accountNumber);
+		if (account == null) {
+			return new ResponseEntity<Account>(account, HttpStatus.NOT_FOUND);
+		}
 
-	/*
-	 * @GetMapping("/{accountNumber}") public ResponseEntity<Account>
-	 * getAccountById(@PathVariable int accountNumber) { //Optional<Account>
-	 * optionalAccount = service.getAccountById(accountNumber); //Account account =
-	 * (Account) optionalAccount.get(); Account account =
-	 * service.getAccountById(accountNumber); if (account == null) { return new
-	 * ResponseEntity<Account>(account, HttpStatus.NOT_FOUND); }
-	 * 
-	 * return new ResponseEntity<Account>(account, HttpStatus.OK);
-	 * 
-	 * }
-	 */
+		return new ResponseEntity<Account>(account, HttpStatus.OK);
+
+	}
 
 	@PutMapping("/{accountNumber}")
 	public ResponseEntity<Account> updateBalance(@PathVariable int accountNumber,
 			@RequestParam("balance") Double currentBalance) {
 
-		Account account = service.getAccountById(accountNumber);
+		Account account = service.getAccountById(accountNumber).get();
 
 		if (account == null) {
-			return new ResponseEntity<Account>(account, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(account, HttpStatus.NOT_FOUND);
 		}
 		currentBalance += account.getCurrentBalance();
 		account.setCurrentBalance(currentBalance);
 		service.updateBalance(account);
-		return new ResponseEntity<Account>(account, HttpStatus.OK);
+		return new ResponseEntity<>(account, HttpStatus.OK);
 
 	}
 
@@ -76,7 +75,5 @@ public class AccountResource {
 	public void delete(@PathVariable int accountNumber) {
 		service.deleteAccount(accountNumber);
 	}
-	@PutMapping("/{accountNumber}")
-	public 
-	
+
 }

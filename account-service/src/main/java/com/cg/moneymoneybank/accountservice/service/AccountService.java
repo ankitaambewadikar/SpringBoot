@@ -11,7 +11,7 @@ public interface AccountService {
 	
 	void updateBalance(Account account);
 	
-	Account getAccountById(int accountNumber);
+	Optional<Account> getAccountById(int accountNumber);
 	
 	List<Account> getAllAccounts();
 	

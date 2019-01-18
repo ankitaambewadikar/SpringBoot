@@ -21,8 +21,8 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Account getAccountById(int accountNumber) {
-		Account account = repository.findById(accountNumber).get();
+	public Optional<Account> getAccountById(int accountNumber) {
+		Optional<Account> account = repository.findById(accountNumber);
 		return account;
 	}
 
